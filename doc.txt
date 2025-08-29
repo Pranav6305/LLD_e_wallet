@@ -1,0 +1,57 @@
+E-Wallet System — Modules & Requirements
+
+1. User Module (finished)
+
+User signup (phone/email).
+User login & logout.
+Profile management (update name, email, phone, address).
+
+2. Bank / Payment Instrument Module (finished)
+
+Add a bank account.
+Update or remove bank account.
+Manage multiple payment instruments(zoho e-wallet,bank account).
+
+3. Wallet Module
+
+View current wallet balance.
+Add money from bank / card / UPI.
+Withdraw money to linked bank.
+
+4. Transaction Module
+
+Peer-to-peer money transfer (by phone/email/QR/UPI ID).
+Merchant payment (via QR code / merchant ID).
+Request money feature.
+Refunds and reversals (full/partial).
+Track transaction status (pending, success, failed).
+
+5. Purchase / Order Module
+
+Store purchase/payment details (merchant, amount, time, status).
+Link orders with payments.
+Handle order cancellation.
+Support refunds for cancelled/failed orders.
+Generate receipts/invoices.
+
+6. Ledger & History Module
+
+Maintain double-entry ledger for all transactions.
+Record debit and credit entries for each transfer.
+Provide transaction history with filters (date, merchant, type).
+Generate monthly/annual statements.
+
+7. Security & Compliance Module
+
+OTP verification for sensitive actions.
+Transaction limits (daily/monthly).
+Fraud detection (suspicious activity monitoring).
+Data encryption (PCI compliance for cards).
+Maintain audit logs for compliance.
+
+8. Notification Module
+
+Push / SMS / Email notifications for wallet activity.
+Payment success / failure alerts.
+Suspicious login or transaction alerts.
+Bill reminders / payment reminders.
