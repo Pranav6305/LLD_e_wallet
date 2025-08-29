@@ -59,9 +59,12 @@ public class zoho_e_wallet {
     }
 
     public void login(String u_email, String username, String password) {
+        //System.out.println(u_email + " " + username + " " + password);
         if (new_user_map.containsKey(u_email)) {
             if (new_user_map.get(u_email).username.equals(username) && new_user_map.get(u_email).password.equals(password)) {
                 System.out.println("User logged in successfully!");
+                log_email = u_email;
+                log_username = username;
             } else {
                 System.out.println("username or password is not valid...");
                 System.out.println("try again...");
@@ -124,43 +127,91 @@ public class zoho_e_wallet {
         while (true) {
             if (choice == 1) {
                 System.out.println("Enter new mobile number:");
-                String new_mobile_number = sc.nextLine();
+                String new_mobile_number = sc.next();
+                sc.nextLine();
+                // System.out.println(user_bank_map);
+                // System.out.println("m:" + mobile_number + " " + "nm:" + new_mobile_number);
                 bank details = user_bank_map.remove(mobile_number);
                 user_bank_map.put(new_mobile_number, details);
+                new_user_map.get(log_email).mobile_number = new_mobile_number;
+                // System.out.println(user_bank_map);
                 System.out.println("Mobile number updated successfully!");
-                continue;
-            } else if (choice == 2) {
+                break;
+            }
+            if (choice == 2) {
                 System.out.println("Enter new email:");
-                String new_email = sc.nextLine();
-                user info = new_user_map.remove(log_email);
-                log_email = new_email;
-                new_user_map.put(new_email, info);
-                user_bank_map.get(mobile_number).email = new_email;
-                System.out.println("Email updated successfully!");
-                continue;
-            } else if (choice == 3) {
+                String new_email = sc.next();
+                sc.nextLine();
+                System.out.println("Enter mobile number:");
+                String new_mobile_number = sc.next();
+                sc.nextLine();
+                // System.out.println(new_email);
+                if (user_bank_map.containsKey(new_mobile_number)) {
+                    user info = new_user_map.remove(log_email);
+                    log_email = new_email;
+                    new_user_map.put(new_email, info);
+                    user_bank_map.get(new_mobile_number).email = new_email;
+                    System.out.println("Email updated successfully!");
+                } else {
+                    System.out.println("Bank account Mobile number linked with the wallet is removed successfully!");
+                }
+                break;
+            }
+            if (choice == 3) {
                 System.out.println("Enter new bank name:");
                 String new_bank_name = sc.nextLine();
-                user_bank_map.get(mobile_number).bank_name = new_bank_name;
-                System.out.println("Bank Name updated successfully!");
-                continue;
-            } else if (choice == 4) {
+                sc.nextLine();
+                System.out.println("Enter mobile number:");
+                String new_mobile_number = sc.nextLine();
+                if (user_bank_map.containsKey(new_mobile_number)) {
+                    user_bank_map.get(new_mobile_number).bank_name = new_bank_name;
+                    System.out.println("Bank Name updated successfully!");
+                } else {
+                    System.out.println("Bank account Mobile number linked with the wallet is removed successfully!");
+                }
+                break;
+            }
+            if (choice == 4) {
                 System.out.println("Enter Account number to be modified:");
                 String new_acc_no = sc.nextLine();
-                user_bank_map.get(mobile_number).acc_no = new_acc_no;
-                System.out.println("Account number updated successfully!");
-                continue;
-            } else if (choice == 5) {
+                sc.nextLine();
+                System.out.println("Enter mobile number:");
+                String new_mobile_number = sc.nextLine();
+                if (user_bank_map.containsKey(new_mobile_number)) {
+                    user_bank_map.get(new_mobile_number).acc_no = new_acc_no;
+                    System.out.println("Account number updated successfully!");
+                } else {
+                    System.out.println("Bank account Mobile number linked with the wallet is removed successfully!");
+                }
+                break;
+            }
+            if (choice == 5) {
                 System.out.println("Enter IFSC code to be modified:");
                 String new_ifsc_code = sc.nextLine();
-                user_bank_map.get(mobile_number).ifsc_code = new_ifsc_code;
-                System.out.println("IFSC code updated successfully!");
-                continue;
-            } else if (choice == 6) {
-                user_bank_map.remove(mobile_number);
-                System.out.println("Bank account removed successfully!");
-                continue;
-            } else if (choice == 7) {
+                sc.nextLine();
+                System.out.println("Enter mobile number:");
+                String new_mobile_number = sc.nextLine();
+                if (user_bank_map.containsKey(new_mobile_number)) {
+                    user_bank_map.get(new_mobile_number).ifsc_code = new_ifsc_code;
+                    System.out.println("IFSC code updated successfully!");
+                } else {
+                    System.out.println("Mobile number is not linked to the wallet");
+                }
+                break;
+            }
+            if (choice == 6) {
+                System.out.println("Enter mobile number:");
+                String new_mobile_number = sc.next();
+                sc.nextLine();
+                if (user_bank_map.containsKey(new_mobile_number)) {
+                    user_bank_map.remove(new_mobile_number);
+                    System.out.println("Bank account Mobile number linked with the wallet is removed successfully!");
+                } else {
+                    System.out.println("Mobile number is not linked to the wallet");
+                }
+                break;
+            }
+            if (choice == 7) {
                 break;
             }
         }
@@ -169,14 +220,17 @@ public class zoho_e_wallet {
     public void menu() {
         System.out.println();
         System.out.println("--------------------------------------");
-        System.out.println("0. User signup/login");
+        System.out.println("0. User signup/login/logout");
         System.out.println("1. Add/Update Bank Details");
+        System.out.println("2. Wallet Details");
         System.out.println("--------------------------------------");
         System.out.println();
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        // for testing: 
+        // new_user_map.put("pranav@", new user("pranavji", "12345", "pranav@", "pranav", "123"));
         zoho_e_wallet zoho = new zoho_e_wallet();
         while (true) {
             zoho.menu();
@@ -184,7 +238,7 @@ public class zoho_e_wallet {
             int choice = sc.nextInt();
             sc.nextLine();
             if (choice == 0) {
-                System.out.println("1.Signup" + "\n" + "2.Login" + "\n" + "3.Profile Management" + "\n" + "4.Exit");
+                System.out.println("1.Signup" + "\n" + "2.Login" + "\n" + "3.Profile Management" + "\n" + "4.Logout" + "\n" + "5.Exit");
                 System.out.println();
                 int option = sc.nextInt();
                 if (option == 1) {
@@ -192,6 +246,7 @@ public class zoho_e_wallet {
                     System.out.println();
                     System.out.println("Enter fullname:");
                     String fullname = sc.nextLine();
+                    sc.nextLine();
                     System.out.println("Enter mobile number:");
                     String mobile_number = sc.nextLine();
                     System.out.println("Enter email:");
@@ -216,7 +271,7 @@ public class zoho_e_wallet {
                     System.out.println("User login\n");
                     System.out.println();
                     System.out.println("Enter email:");
-                    log_email = sc.nextLine();
+                    log_email = sc.next();
                     sc.nextLine();
                     System.out.println("Enter username:");
                     log_username = sc.nextLine();
@@ -228,8 +283,9 @@ public class zoho_e_wallet {
                     System.out.println("Profile Management:");
                     System.out.println();
                     System.out.println("Enter email:");
-                    String email = sc.nextLine();
+                    String email = sc.next();
                     sc.nextLine();
+                    //System.out.println(email);
                     if (!new_user_map.containsKey(email)) {
                         System.out.println("User does not exist!");
                     } else {
@@ -237,17 +293,27 @@ public class zoho_e_wallet {
                         zoho.userprofile(email);
                     }
                     continue;
+                } else if (option == 4) {
+                    if (!checkAuthentication()) {
+                        continue;
+                    }
+                    System.out.println("Logout...");
+                    log_email = null;
+                    log_username = null;
                 } else {
                     continue;
                 }
-            } else if (choice == 1) {
+            }
+            if (choice == 1) {
                 if (!checkAuthentication()) {
                     continue;
                 }
+                // for testing: 
+                // user_bank_map.put("12345", new bank(log_username, log_email, "sbi", "ajwd", "sjwbn", 10000.0, 1000.0));
                 System.out.println("email:" + log_email);
                 System.out.println("username:" + log_username);
                 System.out.println();
-                System.out.println("1.Add bank account with the wallet" + "\n" + "2.Update Bank details" + "3.Exit");
+                System.out.println("1.Add bank account with the wallet" + "\n" + "2.Update Bank details" + "\n" + "3.Exit");
                 int option = sc.nextInt();
                 if (option == 1) {
                     zoho.enter_bankdetails(log_email, new_user_map.get(log_email).mobile_number, log_username, sc);
@@ -258,15 +324,9 @@ public class zoho_e_wallet {
                 } else {
                     continue;
                 }
-            } else if (choice == -1) {
-                if (!checkAuthentication()) {
-                    continue;
-                }
-                System.out.println("Logout...");
-                log_email = null;
-                log_username = null;
-            } else {
-                break;
+            }
+            if (choice == 2) {
+
             }
         }
     }
