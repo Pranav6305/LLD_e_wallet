@@ -327,6 +327,8 @@ public class zoho_e_wallet {
             }
             if (choice == 2) {
 
+            } else {
+                break;
             }
         }
     }
