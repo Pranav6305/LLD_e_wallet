@@ -1,7 +1,7 @@
 
 import java.util.*;
 
-public class zoho_e_wallet {
+public class e_wallet {
 
     static String log_email;
     static String log_username;
@@ -231,7 +231,7 @@ public class zoho_e_wallet {
         Scanner sc = new Scanner(System.in);
         // for testing: 
         //new_user_map.put("pranav@", new user("pranavji", "12345", "pranav@", "pranav", "123"));
-        zoho_e_wallet zoho = new zoho_e_wallet();
+        e_wallet zoho = new e_wallet();
         while (true) {
             zoho.menu();
             System.out.print("Enter Choice:");
