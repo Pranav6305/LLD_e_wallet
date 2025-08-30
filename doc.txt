@@ -12,13 +12,13 @@ Add a bank account.
 Update or remove bank account.
 Manage multiple payment instruments(zoho e-wallet,bank account).
 
-3. Wallet Module
+3. Wallet Module (finished)
 
 View current wallet balance.
-Add money from bank / card / UPI.
-Withdraw money to linked bank.
+Add money from bank / card / UPI (bank->wallet)
+Withdraw money to linked bank (i.e) take money from wallet
 
-4. Transaction Module
+4. Transaction Module  
 
 Peer-to-peer money transfer (by phone/email/QR/UPI ID).
 Merchant payment (via QR code / merchant ID).
